@@ -31,15 +31,8 @@ public class Set {
         int min = 0;
         int max = size-1;
         for(int i = 0; i < list.size(); i++){
-            int avg = min + (max-min)/2;
             if(list.get(i) == val){
                 break;
-            }
-            if(list.get(avg) > val){
-                max = avg - 1;
-            }
-            if(list.get(avg) < val){
-                min = avg + 1;
             }
             count++;
         }
