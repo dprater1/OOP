@@ -1,4 +1,31 @@
+import java.io.IOException;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.jsoup.*;
+
 public class Basketball {
+    public static void main(String args[]){
+
+        final String lebronurl = "https://www.basketball-reference.com/players/j/jamesle01.html";
+    
+            try {
+                final Document docu = Jsoup.connect(lebronurl).get();
+
+                for(Element row : docu.select("table#per_game > tfoot > tr")){
+                        final String ticker = row.select("[data-stat=pts_per_g]").text();
+                    System.out.println(ticker);
+                    break;
+                    }
+            }
+           catch (Exception ex){
+             ex.printStackTrace();
+            }
+           
+
+    }
     private String team;
     
 
@@ -24,10 +51,12 @@ public class Basketball {
 }
 
 class Player extends Basketball{
+    
+   
     private String name;
     private int rings;
     private int MVPs;
-
+    
     public Player(){
         this.name = "";
         this.rings = 0;
