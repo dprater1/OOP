@@ -15,7 +15,8 @@ public class Basketball {
         String last = in.nextLine();
         
         PlayerData data = new PlayerData(first, last);
-        
+        data.PPG();
+        data.CareerStats();
     }
 
     
@@ -42,7 +43,7 @@ class PlayerData{
         //tr:eq(0)
         for(Element row : docu.select("table#per_game > tfoot > tr:eq(0)")){
                 final String ticker = row.select("[data-stat=pts_per_g]").text();
-            System.out.println(ticker + " | ");
+            System.out.println("PPG: " + ticker);
             }
     }
    catch (Exception ex){
@@ -65,6 +66,38 @@ class PlayerData{
 
     }
 
+    public String CareerStats(){
+        final String lebronurl = getInfo(firstName, lastName);
+    
+        try {
+            final Document docu = Jsoup.connect(lebronurl).get();
+            Elements elements = docu.select("table#per_game > tfoot > tr:eq(0) > *");
+            Elements elements2 = docu.select("table#per_game > thead > tr > *");
+            for(Element element2 : elements2){
+                if(!element2.ownText().equals("")){
+                System.out.print(element2.ownText() + " | ");
+                }
+            }
+            int count = 0;
+            for(Element element : elements){
+                if(count == 0){
+                    System.out.println(" ");
+                    System.out.print(element.ownText() + " | ");
+                    count++;
+                    continue;
+                }
+                if(!element.ownText().equals("")){
+                    System.out.print(element.ownText() + " | ");
+                    }
+                    
+            }
+        }
+       catch (Exception ex){
+         ex.printStackTrace();
+        }
+        return "";
+
+    }
 
 }
 
