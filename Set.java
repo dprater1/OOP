@@ -28,8 +28,6 @@ public class Set {
             size++;
         }
         int count = 0;
-        int min = 0;
-        int max = size-1;
         for(int i = 0; i < list.size(); i++){
             if(list.get(i) == val){
                 break;
